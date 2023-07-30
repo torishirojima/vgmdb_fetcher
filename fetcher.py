@@ -158,7 +158,7 @@ def get_album_track_info(soup):
     elif select_tab.find('tl') < 0:
         try:
             index = int(select_tab)
-            items = tlnav_items[index].find('a').attrs['rel'][0]
+            items = tlnav_items[index].find('a').attrs['rel']
             tl_id = items[0] if isinstance(items, list) else items
         except:
             tl_id = get_default_tl_id(tlnav_items)
