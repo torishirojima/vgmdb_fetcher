@@ -158,7 +158,8 @@ def get_album_track_info(soup):
     elif select_tab.find('tl') < 0:
         try:
             index = int(select_tab)
-            tl_id = tlnav_items[index].find('a').attrs['rel']
+            items = tlnav_items[index].find('a').attrs['rel'][0]
+            tl_id = items[0] if isinstance(items, list) else items
         except:
             tl_id = get_default_tl_id(tlnav_items)
     else:
@@ -224,7 +225,7 @@ def tag_audio(album_info, track_info):
 
 def main():
     read_config()
-    if config['lang'] != 'ja' or config['lang'] != 'en':
+    if config['lang'] != 'ja' and config['lang'] != 'en':
         config['lang'] = 'en'
     album_info = None
     track_info = None
