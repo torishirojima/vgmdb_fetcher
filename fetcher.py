@@ -114,7 +114,10 @@ def get_album_info(soup):
             break
     tr_list = soup.select('div#innermain table#album_infobit_large tr')
     for tr in tr_list:
-        [label_dom, value_dom] = tr.find_all('td')
+        tr_sub_dom = tr.find_all('td')
+        if len(tr_sub_dom) < 2:
+            continue
+        [label_dom, value_dom] = tr_sub_dom
         key = ''
         value = ''
         if ('class' in tr.attrs) and (list_find(tr.attrs['class'], 'maincred') >= 0):
